@@ -26,7 +26,7 @@ class SignInViewController: UIViewController {
     }
     
     @IBAction func signInButtonClicked(_ sender: Any) {
-        if self.emailTextField.text! != "" || self.passwordTextField.text! != "" {
+        if self.emailTextField.text! != "" && self.passwordTextField.text! != "" {
             PFUser.logInWithUsername(inBackground: self.emailTextField.text!, password: self.passwordTextField.text!) { (user: PFUser?, error: Error?) in
                 if error == nil {
                     self.dismiss(animated: true, completion: {
@@ -48,7 +48,7 @@ class SignInViewController: UIViewController {
     }
     
     @IBAction func signUpButtonClicked(_ sender: Any) {
-        
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "moveL"), object: nil)
     }
 
     @IBAction func cancelButtonClicked(_ sender: Any) {

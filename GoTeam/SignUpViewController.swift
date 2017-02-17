@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class SignUpViewController: UIViewController {
     
@@ -29,16 +30,18 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func signUpButtonClicked(_ sender: Any) {
-        if self.firstNameTextField.text! != "" && self.lastNameTextField.text! != "" && self.usernameTextField.text! != "" && self.passwordTextField.text! != "" && self.comfirmpasswordTextField.text! != "" {
-            if self.passwordTextField.text! == self.comfirmpasswordTextField.text! {
+        if self.firstNameTextField.text! != "" && self.lastNameTextField.text! != "" && self.emailTextField.text! != "" && self.passwordTextField.text! != "" && self.cPasswordTextField.text! != "" && self.phoneNumberTextField.text! != "" {
+            if self.passwordTextField.text! == self.cPasswordTextField.text! {
                 let user = PFUser()
-                user.username = self.usernameTextField.text!
+                user.username = self.emailTextField.text!
+                user.email = self.emailTextField.text!
                 user.password = self.passwordTextField.text!
-                user[ParseConstant.User.FirstName] = self.firstNameTextField.text!
-                user[ParseConstant.User.LastName] = self.lastNameTextField.text!
+                user[ParseConstants.User.FirstName] = self.firstNameTextField.text!
+                user[ParseConstants.User.LastName] = self.lastNameTextField.text!
+                user[ParseConstants.User.PhoneNumber] = self.phoneNumberTextField.text!
                 user.signUpInBackground(block: { (success: Bool, error: Error?) in
                     if error == nil {
-                        NotificationCenter.default.post(name: Notification.Name(rawValue: "moveEnd"), object: nil)
+                        self.dismiss(animated: true, completion: nil)
                     } else {
                         let alert = UIAlertController(title: "Error", message:"\((error?.localizedDescription)!)", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in })
