@@ -9,6 +9,13 @@
 import Foundation
 
 struct ParseConstants {
+    
+    struct User {
+        static let FirstName = "First_name"
+        static let LastName = "Last_name"
+        static let PhoneNumber = "Phone_num"
+    }
+    
     struct Event {
         static let ClassName = "Event"
         static let EventName = "EventName"
