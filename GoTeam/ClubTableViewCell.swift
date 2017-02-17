@@ -33,7 +33,7 @@ class ClubTableViewCell: UITableViewCell {
     func createGradientLayer() {
         let gradientLayer = CAGradientLayer()
         
-        gradientLayer.frame = self.gradientBackgroundView.bounds
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: 1000, height: self.gradientBackgroundView.frame.size.height)
         
         let colorTop = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.0).cgColor
         let colorBottom = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0).cgColor
