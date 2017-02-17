@@ -41,6 +41,24 @@
             </objects>
             <point key="canvasLocation" x="6431.1999999999998" y="-334.18290854572717"/>
         </scene>
+        <!--Sign In Up Nav View Controller-->
+        <scene sceneID="T60-Aq-n54">
+            <objects>
+                <viewController storyboardIdentifier="signNav" id="l7J-sy-RiH" customClass="SignInUpNavViewController" customModule="GoTeam" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Xow-4e-O2D"/>
+                        <viewControllerLayoutGuide type="bottom" id="ibm-KH-jp8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QtI-Ks-Hma">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iD4-O1-FDY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1036" y="-423"/>
+        </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
@@ -68,7 +86,7 @@
         <!--Calendar-->
         <scene sceneID="V7c-7Y-xdt">
             <objects>
-                <viewController id="X3f-NX-7Ds" sceneMemberID="viewController">
+                <viewController id="X3f-NX-7Ds" customClass="CalendarViewController" customModule="GoTeam" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pdd-Vh-jlm"/>
                         <viewControllerLayoutGuide type="bottom" id="nya-WK-gyo"/>
@@ -137,7 +155,7 @@
                     <navigationItem key="navigationItem" title="Calendar" id="rQC-pr-m7r">
                         <barButtonItem key="leftBarButtonItem" image="User" id="oaa-Rs-MOn">
                             <connections>
-                                <segue destination="FlD-d1-WjU" kind="presentation" id="p0e-wB-8dQ"/>
+                                <segue destination="FlD-d1-WjU" kind="presentation" identifier="userProfileSegue" id="p0e-wB-8dQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -155,6 +173,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.3487287163734436" green="0.053108751773834229" blue="0.033392202109098434" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <inset key="separatorInset" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexBackgroundColor" red="0.3487287163734436" green="0.053108751773834229" blue="0.033392202109098434" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="calendarCell" rowHeight="73" id="3im-cT-9Zq">
@@ -269,7 +288,7 @@
                     <navigationItem key="navigationItem" title="Member" id="xeC-4h-iut">
                         <barButtonItem key="leftBarButtonItem" image="User" id="ste-Oy-N87">
                             <connections>
-                                <segue destination="FlD-d1-WjU" kind="presentation" id="jVf-Zy-CnB"/>
+                                <segue destination="FlD-d1-WjU" kind="presentation" identifier="userProfileSegue" id="jVf-Zy-CnB"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -401,7 +420,7 @@
                     <navigationItem key="navigationItem" title="Club" id="U7F-lS-u80">
                         <barButtonItem key="leftBarButtonItem" image="User" id="tJj-do-wOM">
                             <connections>
-                                <segue destination="FlD-d1-WjU" kind="presentation" id="aRn-Ef-12y"/>
+                                <segue destination="FlD-d1-WjU" kind="presentation" identifier="userProfileSegue" id="aRn-Ef-12y"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -523,7 +542,7 @@
                     <navigationItem key="navigationItem" title="Event" id="Tge-4h-nvQ">
                         <barButtonItem key="leftBarButtonItem" image="User" id="fXb-v5-Qnu">
                             <connections>
-                                <segue destination="FlD-d1-WjU" kind="presentation" id="vCT-MX-czl"/>
+                                <segue destination="FlD-d1-WjU" kind="presentation" identifier="userProfileSegue" id="vCT-MX-czl"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -677,7 +696,7 @@
         <image name="User" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vCT-MX-czl"/>
+        <segue reference="p0e-wB-8dQ"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

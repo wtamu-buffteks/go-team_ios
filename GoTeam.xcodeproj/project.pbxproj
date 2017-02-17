@@ -52,6 +52,7 @@
 		8B98E2F71DF27C56001626D7 /* NSDate+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B98E2E61DF27C56001626D7 /* NSDate+FSExtension.m */; };
 		8B98E2F81DF27C56001626D7 /* NSString+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B98E2E81DF27C56001626D7 /* NSString+FSExtension.m */; };
 		8B98E2F91DF27C56001626D7 /* UIView+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B98E2EA1DF27C56001626D7 /* UIView+FSExtension.m */; };
+		8BF95D611E578C3200C509A9 /* SignInUpNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF95D601E578C3200C509A9 /* SignInUpNavViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +153,7 @@
 		8B98E2E81DF27C56001626D7 /* NSString+FSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+FSExtension.m"; path = "FSCalendar/NSString+FSExtension.m"; sourceTree = "<group>"; };
 		8B98E2E91DF27C56001626D7 /* UIView+FSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+FSExtension.h"; path = "FSCalendar/UIView+FSExtension.h"; sourceTree = "<group>"; };
 		8B98E2EA1DF27C56001626D7 /* UIView+FSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+FSExtension.m"; path = "FSCalendar/UIView+FSExtension.m"; sourceTree = "<group>"; };
+		8BF95D601E578C3200C509A9 /* SignInUpNavViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInUpNavViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +218,7 @@
 		8B2940CE1DF1D463004126DC /* GoTeam */ = {
 			isa = PBXGroup;
 			children = (
+				8BF95D5F1E578BF500C509A9 /* SignUpIn */,
 				8B98E2CC1DF27C41001626D7 /* FSCalendar */,
 				8B29410B1DF1D96F004126DC /* Storyboard */,
 				8B2941091DF1D959004126DC /* Calendar */,
@@ -339,6 +342,14 @@
 				8B98E2EA1DF27C56001626D7 /* UIView+FSExtension.m */,
 			);
 			name = FSCalendar;
+			sourceTree = "<group>";
+		};
+		8BF95D5F1E578BF500C509A9 /* SignUpIn */ = {
+			isa = PBXGroup;
+			children = (
+				8BF95D601E578C3200C509A9 /* SignInUpNavViewController.swift */,
+			);
+			name = SignUpIn;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -498,6 +509,7 @@
 				8B98E2F81DF27C56001626D7 /* NSString+FSExtension.m in Sources */,
 				8B98E2F21DF27C56001626D7 /* FSCalendarEventIndicator.m in Sources */,
 				8B95C5561DF2873F00595BD9 /* BPNavViewController.swift in Sources */,
+				8BF95D611E578C3200C509A9 /* SignInUpNavViewController.swift in Sources */,
 				8B98E2EF1DF27C56001626D7 /* FSCalendarCell.m in Sources */,
 				8B95C59C1DF5105700595BD9 /* CalendarTableViewController.swift in Sources */,
 				8B98E2F01DF27C56001626D7 /* FSCalendarCollectionView.m in Sources */,
