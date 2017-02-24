@@ -29,6 +29,8 @@
 		8B2941291DF2092A004126DC /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2941281DF2092A004126DC /* libsqlite3.tbd */; };
 		8B29412B1DF20935004126DC /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B29412A1DF20935004126DC /* libz.tbd */; };
 		8B29412D1DF212AC004126DC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B29412C1DF212AC004126DC /* Constants.swift */; };
+		8B92CF851E609CB700848880 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B92CF841E609CB700848880 /* UserProfileViewController.swift */; };
+		8B92CF871E60B3F100848880 /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B92CF861E60B3F100848880 /* CalendarTableViewCell.swift */; };
 		8B95C5521DF27FC700595BD9 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B95C5511DF27FC700595BD9 /* CalendarViewController.swift */; };
 		8B95C5541DF280CC00595BD9 /* BPSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B95C5531DF280CC00595BD9 /* BPSplitViewController.swift */; };
 		8B95C5561DF2873F00595BD9 /* BPNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B95C5551DF2873F00595BD9 /* BPNavViewController.swift */; };
@@ -117,6 +119,8 @@
 		8B29412A1DF20935004126DC /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		8B29412C1DF212AC004126DC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8B2941301DF279A9004126DC /* ObjCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCBridge.h; sourceTree = "<group>"; };
+		8B92CF841E609CB700848880 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		8B92CF861E60B3F100848880 /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		8B95C5511DF27FC700595BD9 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		8B95C5531DF280CC00595BD9 /* BPSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BPSplitViewController.swift; sourceTree = "<group>"; };
 		8B95C5551DF2873F00595BD9 /* BPNavViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BPNavViewController.swift; sourceTree = "<group>"; };
@@ -222,6 +226,7 @@
 		8B2940CE1DF1D463004126DC /* GoTeam */ = {
 			isa = PBXGroup;
 			children = (
+				8B92CF831E6098E800848880 /* UserProfile */,
 				8BF95D5F1E578BF500C509A9 /* SignUpIn */,
 				8B98E2CC1DF27C41001626D7 /* FSCalendar */,
 				8B29410B1DF1D96F004126DC /* Storyboard */,
@@ -283,6 +288,7 @@
 			children = (
 				8B95C5511DF27FC700595BD9 /* CalendarViewController.swift */,
 				8B95C59B1DF5105700595BD9 /* CalendarTableViewController.swift */,
+				8B92CF861E60B3F100848880 /* CalendarTableViewCell.swift */,
 			);
 			name = Calendar;
 			sourceTree = "<group>";
@@ -309,6 +315,14 @@
 				8B29411A1DF20872004126DC /* AudioToolbox.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8B92CF831E6098E800848880 /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				8B92CF841E609CB700848880 /* UserProfileViewController.swift */,
+			);
+			name = UserProfile;
 			sourceTree = "<group>";
 		};
 		8B98E2CC1DF27C41001626D7 /* FSCalendar */ = {
@@ -498,6 +512,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BF95D631E57992B00C509A9 /* SignInViewController.swift in Sources */,
+				8B92CF851E609CB700848880 /* UserProfileViewController.swift in Sources */,
 				8B98E2EB1DF27C56001626D7 /* CALayer+FSExtension.m in Sources */,
 				8B95C59A1DF291EA00595BD9 /* ClubTableViewController.swift in Sources */,
 				8B98E2F51DF27C56001626D7 /* FSCalendarStickyHeader.m in Sources */,
@@ -507,6 +522,7 @@
 				8B98E2EC1DF27C56001626D7 /* FSCalendar.m in Sources */,
 				8B29410F1DF1F48C004126DC /* EventTableViewController.swift in Sources */,
 				8B98E2F91DF27C56001626D7 /* UIView+FSExtension.m in Sources */,
+				8B92CF871E60B3F100848880 /* CalendarTableViewCell.swift in Sources */,
 				8B98E2EE1DF27C56001626D7 /* FSCalendarAppearance.m in Sources */,
 				8B98E2F41DF27C56001626D7 /* FSCalendarHeader.m in Sources */,
 				8B98E2F11DF27C56001626D7 /* FSCalendarConstance.m in Sources */,

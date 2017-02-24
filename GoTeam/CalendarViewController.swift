@@ -9,7 +9,47 @@
 import UIKit
 import Parse
 
-class CalendarViewController: UIViewController {
+// MARK: - Extension for NSDate
+extension Date {
+    
+    /// Gets the day of the week from a NSDate
+    ///
+    /// - returns: Int value between 1 -7
+    func doyOfWeek() -> Int? {
+        let comp = Calendar.current.component(.weekday, from: self)
+        return comp
+    }
+    
+    func hour() -> Int? {
+        let comp = Calendar.current.component(.hour, from: self)
+        return comp
+    }
+    
+    func minute() -> Int? {
+        let comp = Calendar.current.component(.minute, from: self)
+        return comp
+    }
+    
+    func day() -> Int? {
+        let comp = Calendar.current.component(.day, from: self)
+        return comp
+    }
+    
+    func month() -> Int? {
+        let comp = Calendar.current.component(.month, from: self)
+        return comp
+    }
+    
+    func year() -> Int? {
+        let comp = Calendar.current.component(.year, from: self)
+        return comp
+    }
+}
+
+class CalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource {
+    
+    @IBOutlet weak var calendarView: FSCalendar!
+    var eventClaendarObjects: [PFObject]!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -19,6 +59,9 @@ class CalendarViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        self.calendarView.delegate = self
+        self.calendarView.dataSource = self
         
         UIApplication.shared.statusBarStyle = .lightContent
         
@@ -32,6 +75,91 @@ class CalendarViewController: UIViewController {
             }
         }
         
+        getEvents()
+        
+    }
+    
+    func getEvents() {
+        let query = PFQuery(className:ParseConstants.Calendar.ClassName)
+        query.limit = 1000
+        query.order(byDescending: ParseConstants.Calendar.Date)
+        query.findObjectsInBackground {
+            (objects: [PFObject]?, error: Error?) in
+            
+            if error == nil {
+                // The find succeeded.
+                print("Successfully retrieved \(objects!.count) scores.")
+                // Do something with the found objects
+                if objects!.count == 0 {
+                    self.eventClaendarObjects = nil
+                } else {
+                    self.eventClaendarObjects = objects
+                }
+                self.calendarView.reloadData()
+            } else {
+                
+            }
+        }
+    }
+    
+    func calendar(_ calendar: FSCalendar!, hasEventFor date: Date!) -> Bool {
+        
+        var thereIsSomething = false
+        if self.eventClaendarObjects != nil {
+            for object: PFObject in self.eventClaendarObjects {
+                let eventdate: Date = object[ParseConstants.Calendar.Date] as! Date
+                if date.year() == eventdate.year() && date.month() == eventdate.month() && date.day() == eventdate.day(){
+                    thereIsSomething = true
+                    break
+                } else {
+                    thereIsSomething = false
+                }
+            }
+            return thereIsSomething
+        } else {
+            return thereIsSomething
+        }
+        
+    }
+    
+    func calendar(_ calendar: FSCalendar!, didSelect date: Date!) {
+        let startDate = self.getStartDate(date)
+        let endDate = self.getEndDate(date)
+        var theEventDateObjects = [PFObject]()
+        if self.eventClaendarObjects != nil {
+            for object: PFObject in self.eventClaendarObjects {
+                let eventdate: Date = object[ParseConstants.Calendar.Date] as! Date
+                if eventdate.timeIntervalSinceReferenceDate > startDate.timeIntervalSinceReferenceDate && eventdate.timeIntervalSinceReferenceDate < endDate.timeIntervalSinceReferenceDate {
+                    theEventDateObjects.insert(object, at: 0)
+                }else {
+                    
+                }
+            }
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "updateDateTable"), object: nil, userInfo: ["events":theEventDateObjects])
+        } else {
+        }
+    }
+    
+    // MARK: - Formate Date to Start and End of Day
+    
+    func getStartDate(_ theDate: Date) -> Date {
+        print("date:  \(theDate)")
+        let gregorianCalendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        var dateComonetnts = (gregorianCalendar as NSCalendar?)?.components([.day, .month, .year], from: theDate)
+        dateComonetnts?.hour = 0
+        dateComonetnts?.minute = 0
+        dateComonetnts?.second = 0
+        return (gregorianCalendar.date(from: dateComonetnts!))!
+    }
+    
+    func getEndDate(_ theDate: Date) -> Date {
+        print("date:  \(theDate)")
+        let gregorianCalendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        var dateComonetnts = (gregorianCalendar as NSCalendar?)?.components([.day, .month, .year], from: theDate)
+        dateComonetnts?.hour = 23
+        dateComonetnts?.minute = 59
+        dateComonetnts?.second = 59
+        return (gregorianCalendar.date(from: dateComonetnts!))!
     }
 
     override func didReceiveMemoryWarning() {

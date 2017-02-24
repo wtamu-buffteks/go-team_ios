@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import Parse
 
 class CalendarTableViewController: UITableViewController {
+    
+    var eventsObjects: [PFObject]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +21,14 @@ class CalendarTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(CalendarTableViewController.changeTableView(_:)), name: NSNotification.Name(rawValue: "updateDateTable"), object: nil)
+    }
+    
+    func changeTableView(_ notification: Notification) {
+        let dictionaryInfo: NSDictionary = notification.userInfo! as NSDictionary
+        eventsObjects = dictionaryInfo["events"] as! [PFObject]
+        self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,18 +45,31 @@ class CalendarTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 8
+        if self.eventsObjects != nil {
+            return self.eventsObjects.count
+        } else {
+            return 0
+        }
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "calendarCell", for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "calendarCell", for: indexPath) as! CalendarTableViewCell
+        
         // Configure the cell...
-
+        let eventObject: PFObject = self.eventsObjects[indexPath.row]
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a"
+        cell.timeLabel.text = formatter.string(from: eventObject[ParseConstants.Calendar.Date] as! Date)
+        cell.titleLabel.text = "\(eventObject[ParseConstants.Calendar.Title] as! String)"
+        cell.descriptionLabel.text = "\(eventObject[ParseConstants.Calendar.Description] as! String)"
+        
         return cell
     }
- 
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 66.0
+    }
 
     /*
     // Override to support conditional editing of the table view.

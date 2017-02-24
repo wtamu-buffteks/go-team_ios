@@ -14,17 +14,26 @@ struct ParseConstants {
         static let FirstName = "First_name"
         static let LastName = "Last_name"
         static let PhoneNumber = "Phone_num"
+        static let Picture = "Picture"
     }
     
     struct Event {
         static let ClassName = "Event"
         static let EventName = "EventName"
         static let Picture = "Picture"
+        static let Date = "Date"
     }
     struct Club {
         static let CLassName = "Club"
         static let ClubName = "Name"
         static let BackgroundImage = "Background_Image"
         static let LogoImage = "Logo_Image"
+    }
+    struct Calendar {
+        static let ClassName = "Calendar"
+        static let Title = "Title"
+        static let Description = "Description"
+        static let Date = "Date"
+        static let Event = "Event"
     }
 }
