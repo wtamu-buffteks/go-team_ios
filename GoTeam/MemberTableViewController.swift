@@ -1,70 +1,70 @@
 //
-//  EventDetailTableViewController.swift
+//  MemberTableViewController.swift
 //  GoTeam
 //
-//  Created by Brett Ponder on 12/2/16.
-//  Copyright © 2016 BuffTeks. All rights reserved.
+//  Created by Brett Ponder on 3/3/17.
+//  Copyright © 2017 BuffTeks. All rights reserved.
 //
 
 import UIKit
 import Parse
 
-class EventDetailTableViewController: UITableViewController {
+class MemberTableViewController: UITableViewController {
+    
+    var memberObjects: [PFObject]!
 
-    @IBOutlet weak var eventImageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    
-    var eventObject: PFObject!
-    var eventImage: UIImage!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        UIApplication.shared.statusBarStyle = .lightContent
-        
-        self.eventImageView.image = self.eventImage
-        self.titleLabel.text = "\(eventObject[ParseConstants.Event.EventName] as! String)"
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMMM d, yyyy h:mm a"
-        self.dateLabel.text = formatter.string(from: eventObject[ParseConstants.Event.Date] as! Date)
-        self.descriptionLabel.text = "\(eventObject[ParseConstants.Event.Description] as! String)"
-        
+        getMembers()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func getMembers() {
+        let query = PFUser.query()
+        query?.order(byDescending: ParseConstants.User.LastName)
+        query?.findObjectsInBackground(block: { (objects: [PFObject]?, error: Error?) in
+            if error == nil {
+                if (objects?.count)! > 0 {
+                    self.memberObjects = objects
+                    self.tableView.reloadData()
+                }
+            }
+        })
+    }
 
     // MARK: - Table view data source
-    /*
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        if self.memberObjects == nil {
+            return 0
+        } else {
+            return self.memberObjects.count
+        }
     }
-    */
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "memberCell", for: indexPath) as! MemberTableViewCell
 
-        // Configure the cell...
-
+        let memberObject = memberObjects[indexPath.row]
+        
+        cell.nameLabel.text = "\(memberObject[ParseConstants.User.FirstName] as! String) \(memberObject[ParseConstants.User.LastName] as! String)"
+        cell.setImage(object: memberObject)
+        
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -100,19 +100,22 @@ class EventDetailTableViewController: UITableViewController {
         return true
     }
     */
-//    
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableViewAutomaticDimension
-//    }
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "memberDSegue" {
+            let controller = segue.destination as! UserProfileViewController
+            let indexPath = tableView.indexPathForSelectedRow!
+            let cell = tableView.cellForRow(at: indexPath) as! MemberTableViewCell
+            let object = self.memberObjects[indexPath.row]
+            controller.memberObject = object
+            controller.profileImage = cell.profilePicImageView.image
+            controller.isNotEditable = true
+        }
     }
-    */
 
 }

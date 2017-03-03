@@ -17,6 +17,10 @@ class UserProfileViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var editPhotoButton: UIBarButtonItem!
+    
+    var profileImage: UIImage!
+    var memberObject: PFObject!
+    var isNotEditable: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,15 +35,19 @@ class UserProfileViewController: UIViewController, UIImagePickerControllerDelega
             }
         }
         
-        if let imageFile = PFUser.current()?[ParseConstants.User.Picture] as? PFFile {
-            imageFile.getDataInBackground(block: { (data: Data?, error: Error?) in
-                self.profilePicImageView.image = UIImage(data: data!)
-            })
+        if isNotEditable {
+            self.profilePicImageView.image = self.profileImage
         }
         
         self.profilePicView.layer.cornerRadius = 40.0
-        self.nameLabel.text = "\(PFUser.current()?[ParseConstants.User.FirstName] as! String) \(PFUser.current()?[ParseConstants.User.LastName] as! String)"
-        self.emailLabel.text = (PFUser.current()?.email)!
+        
+        if isNotEditable {
+            self.nameLabel.text = "\(memberObject[ParseConstants.User.FirstName] as! String) \(memberObject[ParseConstants.User.LastName] as! String)"
+            self.emailLabel.text = "\(memberObject["email"] as! String)"
+        } else {
+            self.nameLabel.text = "\(PFUser.current()?[ParseConstants.User.FirstName] as! String) \(PFUser.current()?[ParseConstants.User.LastName] as! String)"
+            self.emailLabel.text = (PFUser.current()?.email)!
+        }
         
     }
 
