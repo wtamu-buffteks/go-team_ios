@@ -66,6 +66,9 @@ class EventTableViewController: UITableViewController {
         
         let eventObject = eventObjects[indexPath.row]
         cell.eventTitleLabel.text = "\(eventObject[ParseConstants.Event.EventName] as! String)"
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM d, yyyy h:mm a"
+        cell.dateLabel.text = formatter.string(from: eventObject[ParseConstants.Event.Date] as! Date)
         let eventImageFile = eventObject[ParseConstants.Event.Picture] as! PFFile
         eventImageFile.getDataInBackground { (imageData: Data?, error: Error?) in
             if error == nil {
@@ -150,6 +153,14 @@ class EventTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "eventDSegue" {
+            let controller = segue.destination as! EventDetailTableViewController
+            let indexPath = tableView.indexPathForSelectedRow!
+            let cell = tableView.cellForRow(at: indexPath) as! EventTableViewCell
+            let object = self.eventObjects[indexPath.row]
+            controller.eventObject = object
+            controller.eventImage = cell.eventImageView.image
+        }
     }
 
 }

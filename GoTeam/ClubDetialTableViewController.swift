@@ -1,40 +1,38 @@
 //
-//  EventDetailTableViewController.swift
+//  ClubDetialTableViewController.swift
 //  GoTeam
 //
-//  Created by Brett Ponder on 12/2/16.
-//  Copyright © 2016 BuffTeks. All rights reserved.
+//  Created by Brett Ponder on 3/3/17.
+//  Copyright © 2017 BuffTeks. All rights reserved.
 //
 
 import UIKit
 import Parse
 
-class EventDetailTableViewController: UITableViewController {
+class ClubDetialTableViewController: UITableViewController {
 
-    @IBOutlet weak var eventImageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var clubBackgroundImageView: UIImageView!
+    @IBOutlet weak var clubLogoImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var meetingTimeLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    var eventObject: PFObject!
-    var eventImage: UIImage!
+    var clubObject: PFObject!
+    var clubBackgroundImage: UIImage!
+    var clubLogoImage: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        UIApplication.shared.statusBarStyle = .lightContent
+        self.clubLogoImageView.layer.borderWidth = 2.0
+        self.clubLogoImageView.layer.borderColor = UIColor.white.cgColor
         
-        self.eventImageView.image = self.eventImage
-        self.titleLabel.text = "\(eventObject[ParseConstants.Event.EventName] as! String)"
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMMM d, yyyy h:mm a"
-        self.dateLabel.text = formatter.string(from: eventObject[ParseConstants.Event.Date] as! Date)
-        self.descriptionLabel.text = "\(eventObject[ParseConstants.Event.Description] as! String)"
+        self.nameLabel.text = "\(clubObject[ParseConstants.Club.ClubName] as! String)"
+        self.meetingTimeLabel.text = "\(clubObject[ParseConstants.Club.MeetingTime] as! String)"
+        self.descriptionLabel.text = "\(clubObject[ParseConstants.Club.Description] as! String)"
+        
+        self.clubBackgroundImageView.image = self.clubBackgroundImage
+        self.clubLogoImageView.image = self.clubLogoImage
         
     }
 

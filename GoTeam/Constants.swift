@@ -22,12 +22,15 @@ struct ParseConstants {
         static let EventName = "EventName"
         static let Picture = "Picture"
         static let Date = "Date"
+        static let Description = "Description"
     }
     struct Club {
         static let CLassName = "Club"
         static let ClubName = "Name"
         static let BackgroundImage = "Background_Image"
         static let LogoImage = "Logo_Image"
+        static let MeetingTime = "Meeting_Time"
+        static let Description = "Description"
     }
     struct Calendar {
         static let ClassName = "Calendar"

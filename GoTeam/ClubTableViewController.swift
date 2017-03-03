@@ -152,6 +152,15 @@ class ClubTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "clubDSegue" {
+            let controller = segue.destination as! ClubDetialTableViewController
+            let indexPath = tableView.indexPathForSelectedRow!
+            let cell = tableView.cellForRow(at: indexPath) as! ClubTableViewCell
+            let object = self.clubObjects[indexPath.row]
+            controller.clubObject = object
+            controller.clubBackgroundImage = cell.backgroundImageView.image
+            controller.clubLogoImage = cell.logoImageView.image
+        }
     }
 
 }
